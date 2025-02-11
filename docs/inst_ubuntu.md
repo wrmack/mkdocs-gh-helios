@@ -55,29 +55,29 @@
 - safe storage of secrets 
     - optional but if your code is kept on Github this is preferable to hard-coding your Google credentials into settings.py
     - `python3 -m pip install django-environ`    
-    - create an `.env` file with stored secrets
-        ```shell
-            DBPWD=xxxx
-            GOOGLESECRET=xxxx
-            GOOGLEID=xxxx
-        ```
+    - create an `.env` file with stored secrets:
+```shell
+DBPWD=xxxx
+GOOGLESECRET=xxxx
+GOOGLEID=xxxx
+```
     - in `settings.py` insert following after `import os`
-        ```shell
-            import environ
+```shell
+import environ
 
-            # Read in secrets from .env file
-            env = environ.Env()
-            environ.Env.read_env()  
-            DBPWD = env('DBPWD')
-            GOOGLESECRET = env('GOOGLESECRET')
-            GOOGLEID = env('GOOGLEID')
-        ```
+# Read in secrets from .env file
+env = environ.Env()
+environ.Env.read_env()  
+DBPWD = env('DBPWD')
+GOOGLESECRET = env('GOOGLESECRET')
+GOOGLEID = env('GOOGLEID')
+```
     - in `settings.py`:
-        ```shell
-            # google
-            GOOGLE_CLIENT_ID = get_from_env('GOOGLE_CLIENT_ID', GOOGLEID)
-            GOOGLE_CLIENT_SECRET = get_from_env('GOOGLE_CLIENT_SECRET', GOOGLESECRET)
-        ```
+```shell
+# google
+GOOGLE_CLIENT_ID = get_from_env('GOOGLE_CLIENT_ID', GOOGLEID)
+GOOGLE_CLIENT_SECRET = get_from_env('GOOGLE_CLIENT_SECRET', GOOGLESECRET)
+```
     - add `.env` to `.gitignore` so it is not uploaded to Github
 - in a separate terminal start celery
     - cd to your helios project
